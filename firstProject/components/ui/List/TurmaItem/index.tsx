@@ -1,30 +1,26 @@
-import { TurmaType } from '@/types/TurmaType';
+import { TouchableOpacity, ViewStyle } from 'react-native';
 import styles from './styles';
-import { Touchable, TouchableOpacity, ViewStyle } from 'react-native';
-import Title from '../../text/Title';
+import { TurmaType } from '@/types/TurmaType';
+import Title from '../../text/Title/Title';
 
-type TurmaItemProps={
-    turma:TurmaType;
-    style?:ViewStyle;
-    onPress?:()=>void;
+type TurmaItemProps = {
+  turma: TurmaType;
+  style?: ViewStyle;
+  onPress?: () => void;
 };
 
-export default function turmaItem(
-    {
-        turma,
-        style,
-        onPress
-    }:TurmaItemProps
-){
-    <TouchableOpacity
-    style={[styles.itemContainer, style]}
-    onPress={onPress}
+// No componente TurmaItem
+export function TurmaItem({ turma, style, onPress }: TurmaItemProps) {
+  return (
+    <TouchableOpacity 
+      style={[
+        styles.itemContainer, 
+        { borderLeftColor: turma.color }, // Adiciona a cor da borda
+        style
+      ]}
+      onPress={onPress}
     >
-        <Title style={styles.itemText}>
-            {turma.name}
-        </Title>
-
-
+      <Title style={styles.itemText}>{turma.name}</Title>
     </TouchableOpacity>
-    
+  );
 }

@@ -1,13 +1,15 @@
-import { TextStyle, ViewStyle } from "react-native/Libraries/StyleSheet/StyleSheetTypes";
-import styles from "./styles"
-import { TextInput } from "react-native";
+import {
+     TextInput,
+      TextStyle,
+       ViewStyle } from "react-native";
+import styles from "./styles";
 import { View } from "@/components/Themed";
 
-type CustomTextInputProps={
-    hint?:string;
-    defaultValue?:string;
-    containerStyle?:ViewStyle
-    inputStyle?:TextStyle;
+type CustomTextInputProps = {
+    hint?: string;
+    defaultValue?: string;
+    containerStyle?: ViewStyle;
+    inputStyle?: TextStyle;
 };
 
 export default function CustomTextInput({
@@ -16,17 +18,16 @@ export default function CustomTextInput({
     containerStyle,
     inputStyle,
     ...props
-}:CustomTextInputProps){
-return(
-    <View>
-        <TextInput
-        style={[styles.input, inputStyle]}
-        placeholder={hint}
-        defaultValue={defaultValue}
-        placeholderTextColor="#888"
-        {...props}
-        />
-    </View>
-);
+}: CustomTextInputProps) {
+    return (
+        <View>
+            <TextInput
+                style={[styles.input, inputStyle]}
+                placeholder={hint}
+                defaultValue={defaultValue}
+                placeholderTextColor="#888"
+                {...props}
+            />
+        </View>
+    );
 }
-

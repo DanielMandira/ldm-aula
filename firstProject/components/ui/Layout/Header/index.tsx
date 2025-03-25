@@ -1,27 +1,27 @@
-import { View, Text } from "@/components/Themed";
+import { View } from "@/components/Themed";
 import { TextStyle, ViewStyle } from "react-native";
-import style from "./styles";
-import Title from "../../text/Title";
+import style from "./style"
+import Title from "../../text/Title/Title";
+
 type HeaderProps ={
-    title: string;
-    subtitle: string;
-    containerStyle?: ViewStyle;
-    titleStyle?: TextStyle;
-    subtitleStyle?: TextStyle;
+    title:string;
+    subtitle:string;
+    containerStyle?:ViewStyle;
+    titleStyle?:TextStyle;
+    subtitleStyle?:TextStyle;
 }
 
 export default function Header({
-    title, 
-    subtitle, 
-    containerStyle, 
-    titleStyle, 
-    subtitleStyle
-}: HeaderProps){
-    return (
+    title,
+    subtitle,
+    containerStyle,
+    titleStyle,
+    subtitleStyle,
+}:HeaderProps){
+    return(
         <View style={[style.container, containerStyle]}>
-            <Title style={ titleStyle}>{title}:</Title>
-            <Title style={ subtitleStyle}>{subtitle} </Title>
-
+            <Title style={titleStyle}>{title}</Title>
+            <Title style={subtitleStyle}>{subtitle}</Title>
         </View>
-    )
-} 
+    );
+}

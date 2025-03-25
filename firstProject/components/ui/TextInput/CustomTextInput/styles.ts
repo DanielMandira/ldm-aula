@@ -8,10 +8,9 @@ export default StyleSheet.create(
             borderWidth:1,
             borderRadius:8,
             paddingHorizontal:16,
-            fontSize: 16,
+            fontSize:16,
             backgroundColor:'#fff',
             marginVertical:12
         }
     }
-
 );
