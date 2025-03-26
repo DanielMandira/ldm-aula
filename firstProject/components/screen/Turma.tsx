@@ -6,6 +6,8 @@ import ImageComponent from '../ui/Image/ImageComponent';
 import CustomTextInput from '../ui/TextInput/CustomTextInput';
 import { TurmaType } from '@/types/TurmaType';
 import TurmaList from '../ui/List/TurmaList';
+import Counter from '../ui/Layout/UseState/Counter';
+import { useState } from 'react';
 
 const courseColors = [
   '#FF6B6B', // Vermelho
@@ -24,9 +26,11 @@ const turmasData: TurmaType[] = Array.from({ length: 6 }, (_, i) => ({
 
 
 export default function TurmaScreen() {
+  const [selectedTurmaColor, setSelectedTurmaColor] = useState(courseColors[3])
   return (
     <View style={styles.container}>
       <>
+      <Counter/>
         <Header
           title='Turma'
           subtitle='DSM4'
@@ -34,7 +38,8 @@ export default function TurmaScreen() {
           subtitleStyle={{ color: '#000000' }}
         />
         <ImageComponent
-          uri='https://cdn-icons-png.flaticon.com/512/7092/7092289.png'
+          uri='https://i.pinimg.com/originals/c6/69/c0/c669c0fc50112bbda1ad0d16856aee98.png'
+          color='#A8BF4D'
         />
         <CustomTextInput
           hint="Digite o nome da turma..."
