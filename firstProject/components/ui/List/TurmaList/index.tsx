@@ -7,15 +7,19 @@ type TurmaListProps = {
     turmas: TurmaType[];
     style?: StyleProp<ViewStyle>;
     itemStyle?: ViewStyle;
+    contentContainerStyle?: StyleProp<ViewStyle>;
+    onTurmaPress?: (turma: TurmaType) => void;    
 };
 
 export default function TurmaList({
     turmas,
     style,
-    itemStyle
+    itemStyle,
+    contentContainerStyle,
+    onTurmaPress,
 }: TurmaListProps) {
     const renderItem: ListRenderItem<TurmaType> = ({ item }) => (
-        <TurmaItem turma={item} style={itemStyle} />
+        <TurmaItem turma={item} style={itemStyle} onPress={()=> onTurmaPress?.(item)}/>
     );
     return (
         <FlatList

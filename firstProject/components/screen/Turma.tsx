@@ -26,7 +26,11 @@ const turmasData: TurmaType[] = Array.from({ length: 6 }, (_, i) => ({
 
 
 export default function TurmaScreen() {
-  const [selectedTurmaColor, setSelectedTurmaColor] = useState(courseColors[3])
+  const [searchQuery, setSearchQuery] = useState('')
+const filteredTurmas = turmasData.filter(turma =>
+  turma.name.toLowerCase().includes(searchQuery.toLowerCase())
+)
+  const [selectedTurmaColor, setSelectedTurmaColor] = useState(courseColors[0])
   return (
     <View style={styles.container}>
       <>
@@ -34,22 +38,24 @@ export default function TurmaScreen() {
         <Header
           title='Turma'
           subtitle='DSM4'
-          titleStyle={{ color: '#ff0000' }}
-          subtitleStyle={{ color: '#000000' }}
+          titleStyle={{ color: selectedTurmaColor }}
+          subtitleStyle={{ color: selectedTurmaColor }}
         />
         <ImageComponent
           uri='https://i.pinimg.com/originals/c6/69/c0/c669c0fc50112bbda1ad0d16856aee98.png'
-          color='#A8BF4D'
+          color={selectedTurmaColor}
         />
         <CustomTextInput
           hint="Digite o nome da turma..."
           inputStyle={styles.customInput}
+          onChangeText={setSearchQuery}
         />
       </>
 
       <TurmaList
-        turmas={turmasData}
+        turmas={filteredTurmas}
         style={styles.listContainer}
+        onTurmaPress={(turma)=> setSelectedTurmaColor(turma.color)}
       />
 
       <View style={styles.separator} />
