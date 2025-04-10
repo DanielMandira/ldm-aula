@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, SafeAreaView, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, SafeAreaView } from 'react-native';
 import { calculatorScreenStyles, operationColors } from './CalculatorScreen.styles';
+import { OperationButton } from '../ui/Operadores/OperationButton';
+import { HistoryList } from '../ui/Historico/HistoryList';
+import { NumberInput } from '../ui/Numeros/NumberInput';
 
 // Definir o tipo para as operações
 type Operation = '+' | '-' | '×' | '÷';
@@ -71,69 +74,47 @@ export const CalculatorScreen = () => {
       <Text style={calculatorScreenStyles.title}>Calculadora Simples</Text>
       
       <View style={calculatorScreenStyles.inputContainer}>
-        <Text style={calculatorScreenStyles.label}>Primeiro Número:</Text>
-        <TextInput
-          style={calculatorScreenStyles.input}
+        <NumberInput
+          label="Primeiro Número"
           value={firstNumber}
           onChangeText={setFirstNumber}
-          keyboardType="numeric"
-          placeholder="Digite o primeiro número"
         />
         
-        <Text style={calculatorScreenStyles.label}>Segundo Número:</Text>
-        <TextInput
-          style={calculatorScreenStyles.input}
+        <NumberInput
+          label="Segundo Número"
           value={secondNumber}
           onChangeText={setSecondNumber}
-          keyboardType="numeric"
-          placeholder="Digite o segundo número"
         />
       </View>
       
       <View style={calculatorScreenStyles.operationContainer}>
-        <TouchableOpacity 
-          style={[
-            calculatorScreenStyles.operationButton, 
-            { backgroundColor: operationColors['+'] },
-            operation === '+' && calculatorScreenStyles.selectedOperation
-          ]} 
-          onPress={() => calculate('+')}
-        >
-          <Text style={calculatorScreenStyles.operationText}>+</Text>
-        </TouchableOpacity>
+        <OperationButton
+          operation="+"
+          isSelected={operation === '+'}
+          onPress={calculate}
+          color={operationColors['+']}
+        />
         
-        <TouchableOpacity 
-          style={[
-            calculatorScreenStyles.operationButton, 
-            { backgroundColor: operationColors['-'] },
-            operation === '-' && calculatorScreenStyles.selectedOperation
-          ]} 
-          onPress={() => calculate('-')}
-        >
-          <Text style={calculatorScreenStyles.operationText}>-</Text>
-        </TouchableOpacity>
+        <OperationButton
+          operation="-"
+          isSelected={operation === '-'}
+          onPress={calculate}
+          color={operationColors['-']}
+        />
         
-        <TouchableOpacity 
-          style={[
-            calculatorScreenStyles.operationButton, 
-            { backgroundColor: operationColors['×'] },
-            operation === '×' && calculatorScreenStyles.selectedOperation
-          ]} 
-          onPress={() => calculate('×')}
-        >
-          <Text style={calculatorScreenStyles.operationText}>×</Text>
-        </TouchableOpacity>
+        <OperationButton
+          operation="×"
+          isSelected={operation === '×'}
+          onPress={calculate}
+          color={operationColors['×']}
+        />
         
-        <TouchableOpacity 
-          style={[
-            calculatorScreenStyles.operationButton, 
-            { backgroundColor: operationColors['÷'] },
-            operation === '÷' && calculatorScreenStyles.selectedOperation
-          ]} 
-          onPress={() => calculate('÷')}
-        >
-          <Text style={calculatorScreenStyles.operationText}>÷</Text>
-        </TouchableOpacity>
+        <OperationButton
+          operation="÷"
+          isSelected={operation === '÷'}
+          onPress={calculate}
+          color={operationColors['÷']}
+        />
       </View>
       
       <View style={calculatorScreenStyles.resultContainer}>
@@ -145,20 +126,7 @@ export const CalculatorScreen = () => {
       
       <View style={calculatorScreenStyles.historyContainer}>
         <Text style={calculatorScreenStyles.historyTitle}>Últimos 5 Resultados:</Text>
-        <ScrollView style={calculatorScreenStyles.historyList}>
-          {history.length > 0 ? (
-            history.map((item, index) => (
-              <View key={index} style={calculatorScreenStyles.historyItem}>
-                <Text style={calculatorScreenStyles.historyExpression}>{item.expression}</Text>
-                <Text style={[calculatorScreenStyles.historyResult, { color: item.color }]}>
-                  {item.result}
-                </Text>
-              </View>
-            ))
-          ) : (
-            <Text style={calculatorScreenStyles.emptyHistory}>Nenhum cálculo realizado</Text>
-          )}
-        </ScrollView>
+        <HistoryList history={history} />
       </View>
       
       <TouchableOpacity style={calculatorScreenStyles.clearButton} onPress={clearAll}>
